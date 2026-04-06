@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber-Snake 🐍</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>Cyber-Snake</h1>
+        <div class="score-container">
+            <div class="score-board">Skor: <span id="scoreVal">0</span></div>
+            <div class="score-board">Rekor: <span id="highScoreVal">0</span></div>
+        </div>
+        <canvas id="gameCanvas" width="400" height="400"></canvas>
+        <p class="info-text">Yön tuşlarını kullan</p>
+        <button onclick="location.reload()">Yeniden Başlat</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
