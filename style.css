@@ -1,4 +1,4 @@
-/* style.css dosyanı bu kodlarla tamamen değiştir */
+
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
 body {
@@ -14,7 +14,7 @@ body {
     overflow: hidden;
 }
 
-/* 3D Grid Efekti ve Tarama Çizgileri */
+
 body::before {
     content: "";
     position: absolute;
@@ -45,7 +45,7 @@ h1 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     filter: drop-shadow(0 0 10px rgba(0, 242, 255, 0.8));
-    animation: textFlicker 3s infinite; /* Hafif bir kırpışma efekti */
+    animation: textFlicker 3s infinite; 
 }
 
 @keyframes textFlicker {
@@ -76,7 +76,7 @@ canvas {
     background-color: rgba(0, 0, 0, 0.95);
     border-radius: 8px;
     box-shadow: 0 0 30px rgba(0, 242, 255, 0.5), inset 0 0 20px rgba(0, 242, 255, 0.3);
-    /* CRT Monitör Eğimi Efekti */
+   
     position: relative;
 }
 
@@ -101,8 +101,7 @@ button {
     transition: 0.4s;
     box-shadow: 0 5px 20px rgba(0, 242, 255, 0.5);
     text-transform: uppercase;
-    animation: gradientShift 4s infinite linear; /* Akan renk efekti */
-}
+    animation: gradientShift 4s infinite linear; 
 
 @keyframes gradientShift {
     0% { background-position: 0% 50%; }
