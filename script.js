@@ -1,4 +1,4 @@
-// script.js dosyanı bu kodlarla tamamen değiştir
+
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 const scoreElement = document.getElementById("scoreVal");
@@ -29,15 +29,15 @@ function createFood() {
 let food = createFood();
 
 document.addEventListener("keydown", (e) => {
-    // Yön tuşları veya WASD ile başla
+    
     if (!gameStarted && [37, 38, 39, 40, 65, 87, 68, 83].includes(e.keyCode)) gameStarted = true;
     let key = e.keyCode;
-    // Ok Tuşları
+        // Ok Tuşları
     if (key == 37 && d != "RIGHT") directionQueue.push("LEFT");
     else if (key == 38 && d != "DOWN") directionQueue.push("UP");
     else if (key == 39 && d != "LEFT") directionQueue.push("RIGHT");
     else if (key == 40 && d != "UP") directionQueue.push("DOWN");
-    // WASD Kontrolleri
+        // WASD Kontrolleri
     else if (key == 65 && d != "RIGHT") directionQueue.push("LEFT"); // A
     else if (key == 87 && d != "DOWN") directionQueue.push("UP");    // W
     else if (key == 68 && d != "LEFT") directionQueue.push("RIGHT"); // D
@@ -59,30 +59,30 @@ function draw() {
 
     if (directionQueue.length > 0) d = directionQueue.shift();
 
-    // Yemeği Çiz (Parlamalı)
+    //Food
     ctx.shadowBlur = 15;
     ctx.shadowColor = food.type === "GOLD" ? "#ffd700" : "#ff0055";
     ctx.fillStyle = food.type === "GOLD" ? "#ffd700" : "#ff0055";
     ctx.beginPath();
     ctx.arc(food.x + box / 2, food.y + box / 2, box / 2.5, 0, Math.PI * 2);
     ctx.fill();
-    ctx.shadowBlur = 0; // Gölgeyi sıfırla
+    ctx.shadowBlur = 0; 
 
-    // Yılanı Çiz (Gradyanlı ve Köşe Yuvarlamalı)
+    
     for (let i = 0; i < snake.length; i++) {
         let gradient = ctx.createLinearGradient(snake[i].x, snake[i].y, snake[i].x + box, snake[i].y + box);
-        // Kafa daha parlak, vücut daha koyu mavi
+       
         gradient.addColorStop(0, i === 0 ? "#00ffff" : "#0062ff");
         gradient.addColorStop(1, i === 0 ? "#0062ff" : "#003366");
 
         ctx.fillStyle = gradient;
         ctx.beginPath();
-        let r = 5; // Köşe yuvarlama yarıçapı
-        // Hafif bir boşluk (gap) bırakalım
+        let r = 5; 
+        
         drawRoundedRect(ctx, snake[i].x + 1, snake[i].y + 1, box - 2, box - 2, r);
         ctx.fill();
 
-        if (i === 0) { // Gözler
+        if (i === 0) { 
             ctx.fillStyle = "white";
             ctx.beginPath();
             ctx.arc(snake[i].x + 6, snake[i].y + 7, 2, 0, Math.PI * 2);
@@ -111,26 +111,26 @@ function draw() {
             localStorage.setItem("snakeHighScore", highScore);
         }
 
-        // Hızlanma Mantığı
+        // Hızlanma 
         if (gameSpeed > 60) { // Maksimum hız sınırı
-            gameSpeed -= food.type === "GOLD" ? 8 : 2; // Altın elma çok hızlandırır
+            gameSpeed -= food.type === "GOLD" ? 8 : 2; // Altın elma hızı
             clearInterval(game);
             game = setInterval(draw, gameSpeed);
         }
         food = createFood();
     } else {
-        snake.pop(); // Hareket devamı (kuyruğu siler)
+        snake.pop();
     }
 
     let newHead = { x: snakeX, y: snakeY };
 
-    // Ölüm Kontrolü
+    // Ölüm 
     if (snakeX < 0 || snakeY < 0 || snakeX >= canvas.width || snakeY >= canvas.height || collision(newHead, snake)) {
         clearInterval(game);
-        triggerGameOverEffect(); // Oyun bitti efekti
+        triggerGameOverEffect(); // Oyun bitti 
         return;
     }
-    snake.unshift(newHead); // Yeni kafayı ekler
+    snake.unshift(newHead); 
 }
 
 function collision(head, array) {
@@ -140,7 +140,7 @@ function collision(head, array) {
     return false;
 }
 
-// Yardımcı: Yuvarlak köşeli dikdörtgen çizer
+
 function drawRoundedRect(ctx, x, y, width, height, radius) {
     ctx.moveTo(x + radius, y);
     ctx.lineTo(x + width - radius, y);
@@ -154,7 +154,7 @@ function drawRoundedRect(ctx, x, y, width, height, radius) {
     ctx.closePath();
 }
 
-// Oyun Bitti Efekti (Ekran Kırpışması ve Yazı)
+// Oyun Bitti Efekti 
 function triggerGameOverEffect() {
     let flickerCount = 0;
     const maxFlickers = 3;
@@ -177,7 +177,7 @@ function triggerGameOverEffect() {
         if (flickerCount >= maxFlickers * 2) {
             clearInterval(flickerInterval);
         }
-    }, 150); // Kırpışma hızı (ms)
+    }, 150); // ms
 }
 
 game = setInterval(draw, gameSpeed);
